@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Centre de connexion</title>
+    <link href="https://bootswatch.com/4/simplex/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class=" logo-ccsd nbrand" href="https://www.ccsd.cnrs.fr/" title="Centre pour la Communication Scientifique Directe">
+        <img src="https://hal.archives-ouvertes.fr/img/ccsd.png"
+             border="0" alt="CCSD" />
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">HAL</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Episciences.org</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sciencesconf.org</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Support</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="text-center">Service Central d'Authentification du <abbr lang="fr" title="Centre pour la communication scientifique directe">CCSD</abbr></h1>
+    <div id="logos-div" class="row">
+        <div class="col-sm-4">
+            <img class="img-rounded" src="https://cas.ccsd.cnrs.fr/cas/images/logo-episciences.png" alt="">
+        </div>
+        <div class="col-sm-4">
+            <img class="img-rounded center-logo" src="https://cas.ccsd.cnrs.fr/cas/images/logo-hal.png" alt="">
+        </div>
+        <div class="col-sm-4">
+            <img class="img-rounded" src="https://cas.ccsd.cnrs.fr/cas/images/logo-sciencesconf.png" alt="">
+        </div>
+    </div>
+    <div class="row mt-5">
+    <span class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Entrez votre identifiant et votre mot de passe.</strong>
+                </div>
+            <div class="panel-body" id="login">
+                {{ form_start(form, {'action': path('contributor_authentification') }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </span>
+        <span class="col-sm-6">
+            <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Vous n'avez pas de compte</strong>
+                    </div>
+                    <div class="panel-body" id="no-account" style="padding-top:120px;padding-bottom:120px;">
+                        <a class="btn btn-primary btn-lg btn-block" id="create-account" href="{{ path('contributor_new') }}">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Créer un compte
+                        </a>
+                    </div>
+                    <div class="panel-footer" style="text-align:center;">
+                        <a href="https://hal.archives-ouvertes.fr/page/creer-son-compte-et-son-profil-dans-hal">Aide</a>
+                    </div>
+                </div>
+    </span>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contributor;
+use App\Form\ConnexionContributorType;
 use App\Form\ContributorType;
 use App\Repository\ContributorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContributorController extends AbstractController
 {
     /**
-     * @Route("/", name="contributor_index", methods={"GET"})
+     * @Route("/contributor", name="contributor_index", methods={"GET"})
      */
     public function index(ContributorRepository $contributorRepository): Response
     {
@@ -26,7 +27,7 @@ class ContributorController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="contributor_new", methods={"GET","POST"})
+     * @Route("contributor/new", name="contributor_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +50,7 @@ class ContributorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="contributor_show", methods={"GET"})
+     * @Route("/contributor/{id}", name="contributor_show", methods={"GET"})
      */
     public function show(Contributor $contributor): Response
     {
@@ -59,7 +60,7 @@ class ContributorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="contributor_edit", methods={"GET","POST"})
+     * @Route("/contributor/{id}/edit", name="contributor_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Contributor $contributor): Response
     {
@@ -81,7 +82,7 @@ class ContributorController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="contributor_delete", methods={"DELETE"})
+     * @Route("/contributor/{id}", name="contributor_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Contributor $contributor): Response
     {
@@ -92,5 +93,53 @@ class ContributorController extends AbstractController
         }
 
         return $this->redirectToRoute('contributor_index');
+    }
+
+    /**
+     * @Route("/contributor/login", name = "contributor_connexion")
+     */
+    public function connexion(ContributorRepository $repository, Request $request){
+
+        $form = $this->createForm(ConnexionContributorType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&& $form->isValid()){
+            $data = $form->getData();
+            dump($data);
+            $login = $data->getLogin();
+            $pwd = $data->getPwd();
+            /**
+             *Searching for contributor's having login && Pwd into the database
+             * @var $contributor Contributor
+             */
+            $contributor = $repository->findOneBy([
+                'login' => $login,
+                'pwd'   => $pwd
+            ]);
+            dump($contributor);
+            if($contributor!==null){
+                $this->addFlash('success','Authentification réussite');
+                return $this->redirectToRoute('contributor_show',['id'=> $contributor->getId()]);
+            }
+        }
+        return $this->render('/contributor/connexion.html.twig',[
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/contributor/{id}", name ="contributor_authentification")
+     * @return Response
+     */
+    public function authentification($id) : Response
+    {
+        $contributor = $this->getDoctrine()
+                            ->getRepository(Contributor::class)
+                            ->find($id);
+        if(!$contributor){
+            return $this->render('contributor/error.html.twig');
+        }
+        return $this->render('contributor/index.html.twig', [
+            'controller_name' => 'ContributorController',
+            'contributor' => $contributor
+        ]);
     }
 }

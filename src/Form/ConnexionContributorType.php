@@ -4,6 +4,9 @@ namespace App\Form;
 
 use App\Entity\Contributor;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,14 +15,20 @@ class ConnexionContributorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('civility')
-            ->add('lastname')
-            ->add('firstname')
-            ->add('complementName')
-            ->add('login')
-            ->add('pwd')
-            ->add('decision')
-            ->add('documents')
+            ->add('login',TextType::class,[
+                                                        'label' => 'Login',
+                                                        'help' => 'Le login est obligatoire',
+                                                        'required' => true
+                                                    ])
+            ->add('pwd',PasswordType::class,[
+                                                        'label' => 'Le Mot de passe est obligatoire',
+                                                        'help' => 'Le mot de passe est obligatoire',
+                                                        'required' => true
+
+                                                        ])
+            ->add('save',SubmitType::class,[
+                'label' => 'Se connecter'
+            ])
         ;
     }
 
