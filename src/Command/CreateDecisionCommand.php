@@ -2,6 +2,10 @@
 
 namespace App\Command;
 
+use App\Entity\Decision;
+use App\Repository\ContributorRepository;
+use App\Repository\DocumentRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,29 +16,72 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CreateDecisionCommand extends Command
 {
     protected static $defaultName = 'CreateDecision';
+    private $documentRepository;
+    private $contributorRepository;
+    private $manager;
+    public function __construct(ContributorRepository $contributorRepository, DocumentRepository $documentRepository, ObjectManager $manager)
+    {
+        parent::__construct();
+        $this->manager = $manager;
+        $this->contributorRepository = $contributorRepository;
+        $this->documentRepository = $documentRepository;
+    }
 
     protected function configure()
     {
         $this
-            ->setDescription('Add a short description for your command')
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->setDescription('Create a deposit decision for a document related to a contributor not yet into HAL')
+            ->addArgument('admin',
+                InputArgument::OPTIONAL,
+                'Administrator multiple decisions')
+            ->addOption('document',
+                'd',
+                InputOption::VALUE_REQUIRED,
+                'The identifiant of the document concerned about the deposit')
+            ->addOption('contributor',
+                'c',
+                InputOption::VALUE_REQUIRED,
+                'The identifiant of the contributor concerned about the deposit')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
+        $admin = $input->getArgument('admin');
+        $docID = $input->getOption('document');
+        $conID = $input->getOption('contributor');
+        if ($admin) {
+            //Operations created by the administrator
+            $io->note(sprintf('You passed an argument: %s', $admin));
+        }
+        else{
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
+            /**
+             * Getting the Document's informations having id = $docID
+             */
+
+            $document = $this->documentRepository->find($docID);
+            /**
+             * Getting the Contributor's informations having id = $conID
+             */
+            $contributor = $this->contributorRepository->find($conID);
+            /**
+             * Adding the new Decision (isTaken = false)
+             */
+            $decision = new Decision();
+            $decision->setContent('En cours de construction')
+                     ->addDocument($document)
+                     ->addContributor($contributor)
+                     ->setAllowedAt(new \DateTime())
+                     ->setIsTaken(false);
+            /**
+             * Persist the Decision and Flush into the Database
+             */
+            $this->manager->persist($decision);
+            $this->manager->flush();
         }
 
-        if ($input->getOption('option1')) {
-            // ...
-        }
-
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('Félicitations : Les décisions sont crées et en cours d\'attente des contributeurs .');
     }
 }
