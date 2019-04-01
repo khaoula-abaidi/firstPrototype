@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contributor{% endblock %}
+
+{% block body %}
+    <h1>Contributor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contributor.id }}</td>
+            </tr>
+            <tr>
+                <th>Civility</th>
+                <td>{{ contributor.civility }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ contributor.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ contributor.firstname }}</td>
+            </tr>
+            <tr>
+                <th>ComplementName</th>
+                <td>{{ contributor.complementName }}</td>
+            </tr>
+            <tr>
+                <th>Login</th>
+                <td>{{ contributor.login }}</td>
+            </tr>
+            <tr>
+                <th>Pwd</th>
+                <td>{{ contributor.pwd }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('contributor_index') }}">back to list</a>
+
+    <a href="{{ path('contributor_edit', {'id': contributor.id}) }}">edit</a>
+
+    {{ include('contributor/_delete_form.html.twig') }}
+{% endblock %}
