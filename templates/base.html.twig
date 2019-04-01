@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Archive Ouverte HAL{% endblock %}</title>
+        <link href="https://static.ccsd.cnrs.fr/" rel="dns-prefetch" >
+        <link href="https://cas.ccsd.cnrs.fr/" rel="dns-prefetch" >
+        <link href="https://cdn.mathjax.org/" rel="dns-prefetch" >
+        <link href="https://hal.archives-ouvertes.fr/img/favicon.png" rel="icon" type="type/png" >
+        <link href="https://hal.archives-ouvertes.fr/search/opensearch" rel="search" type="application/opensearchdescription+xml" title="HAL" >
+        <link href="https://hal.archives-ouvertes.fr/css/print_hal.css" media="print" rel="stylesheet" type="text/css" >
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+        <meta http-equiv="Content-Language" content="fr" >
+        <script type="text/javascript">
+            //<!--
+            var lang = 'fr';    //-->
+        </script>
+        <link rel="stylesheet" href="https://static.ccsd.cnrs.fr/css/ccsd_form.css?1553694329" type="text/css" media="screen">
+        <link rel="stylesheet" href="https://static.ccsd.cnrs.fr/css/custom-theme/jquery-ui-1.10.0.custom.css?1553694329" type="text/css" media="screen">
+        <link rel="stylesheet" href="https://static.ccsd.cnrs.fr/v3/css/bootstrap.min.css?1553694329" type="text/css" media="screen">
+        <link rel="stylesheet" href="https://static.ccsd.cnrs.fr/css/ccsd.css?1553694329" type="text/css" media="screen">
+        <link rel="stylesheet" href="https://hal.archives-ouvertes.fr/css/hal.css?1553694329" type="text/css" media="screen">
+        <link rel="stylesheet" href="https://hal.archives-ouvertes.fr/public/style.css?1436338106&1553694329" type="text/css" media="screen">
+
+        <script type="text/javascript" src="https://static.ccsd.cnrs.fr/js/jquery/jquery-1.12.4.min.js?1553694329"></script>
+        <script type="text/javascript" src="https://static.ccsd.cnrs.fr/js/jquery-ui-1.11.4/jquery-ui.min.js?1553694329"></script>
+        <script type="text/javascript" src="https://hal.archives-ouvertes.fr/js/translations.php?lang=fr&1553694329"></script>
+        <script type="text/javascript" src="https://hal.archives-ouvertes.fr/js/translations.php?lang=fr&1553694329"></script>
+        <script type="text/javascript" src="https://static.ccsd.cnrs.fr/v3/js/bootstrap.min.js?1553694329"></script>
+        <script type="text/javascript" src="https://static.ccsd.cnrs.fr/js/form.js?1553694329"></script>
+        <script type="text/javascript" src="https://hal.archives-ouvertes.fr/js/utile.js?1553694329"></script>
+
+        <script type="text/javascript">
+            //<!--
+            google.load("visualization", "1.0", {"packages":["corechart"]});
+            //-->
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+        <script type='text/x-mathjax-config'>MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['$$','$$']]}});</script>
+
+        <style type="text/css">
+            html {
+                position: relative;
+                min-height: 100%;
+            }
+
+
+        </style>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header ">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#nav-services">
+                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+            <div class="logo-ccsd">
+                <a class="brand" href="https://www.ccsd.cnrs.fr/"
+                   title="Centre pour la Communication Scientifique Directe"><img src="https://hal.archives-ouvertes.fr/img/ccsd.png"
+                                                                                  border="0" alt="CCSD" />
+                </a>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="nav-services">
+            <ul class="nav navbar-nav">
+                <li class="dropdown active"><a
+                            href="#" class="dropdown-toggle" data-toggle="dropdown">HAL <b class="caret" style="border-top-color:#ee5a35;border-bottom-color:#ee5a35;"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://hal.archives-ouvertes.fr">HAL</a></li>
+                        <li><a href="https://halshs.archives-ouvertes.fr">HALSHS</a></li>
+                        <li><a href="https://tel.archives-ouvertes.fr">TEL</a></li>
+                        <li><a href="https://medihal.archives-ouvertes.fr">MédiHAL</a></li>
+                        <li><a href="https://hal.archives-ouvertes.fr/browse/portal">Liste des portails</a></li>
+                        <li class="divider"></li>
+                        <li><a href="https://aurehal.archives-ouvertes.fr" target="_blank">AURéHAL</a></li>
+                        <li><a href="http://api.archives-ouvertes.fr/docs">API</a></li>
+                        <li><a href="https://data.archives-ouvertes.fr/" title="HAL SPARQL endpoint">Data</a></li>
+                        <li><a href="https://hal.archives-ouvertes.fr/section/documentation" rel="help">Documentation</a></li>
+                    </ul></li>
+
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Episciences.org <b class="caret" style="border-top-color:#ee5a35;border-bottom-color:#ee5a35;"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.episciences.org">Episciences.org</a></li>
+                        <li><a href="https://www.episciences.org/page/journals">Revues</a></li>
+                        <li class="divider"></li>
+                        <li><a href="https://doc.episciences.org/" rel="help">Documentation</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="">
+                    <a href="https://www.sciencesconf.org">Sciencesconf.org</a></li>
+                <li><a href="https://support.ccsd.cnrs.fr">Support</a></li>
+            </ul>
+            <div class="nav navbar-nav navbar-right">
+                <form class="form-inline pull-right"
+                      style="margin-top: 8px; margin-right: 8px;"
+                      action="/user/login" id="form-login" method="post">
+                    <input type="hidden" name="forward-controller"
+                           value="index" />
+                    <input type="hidden" name="forward-action"
+                           value="index" />
+                    <div class="btn-group">
+                        <button class="btn btn-small btn-primary" type="button"
+                                onclick="$('#form-login').submit();" accesskey="l">
+                            <i class="glyphicon glyphicon-user glyphicon-white"></i>&nbsp;Connexion                                    </button>
+                        <button class="btn btn-small btn-primary dropdown-toggle" data-toggle="dropdown"
+                                type="button">
+                            <span class="caret" style="border-top-color: #fff; border-bottom-color: #fff;"></span>
+                        </button>
+
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#" onclick="$('#form-login').submit();">Connexion</a></li>
+                            <li><a id="getorcid" href="https://orcid.org/oauth/authorize?client_id=APP-O6Y5HZD2SFM7ON6Z&response_type=code&scope=/authenticate&redirect_uri=https://hal.archives-ouvertes.fr/user/coext?url=https://hal.archives-ouvertes.fr/">Connexion avec ORCID</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/user/create">Créer un compte</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/user/lostpassword">Mot de passe oublié ?</a></li>
+                            <li><a href="/user/lostlogin">Login oublié ?</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <form action="" method="post" id="formLang">
+                <input type="hidden" name="lang" id="lang" value="" />
+                <ul class="nav navbar-nav navbar-right navbar-lang">
+                    <li class=" active"><a
+                                href="javascript:void(0);" title="fr"
+                                onclick="$('#lang').val('fr');$('#formLang').submit();"><span
+                                    class="badge small">fr</span></a></li>
+                    <li class=" "><a
+                                href="javascript:void(0);" title="en"
+                                onclick="$('#lang').val('en');$('#formLang').submit();"><span
+                                    class="badge small">en</span></a></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <div id="container" class="container">
+        <div class="logo">
+            <table width="100%" cellpadding="0" style="position:relative;">
+                <tr>
+                    <td align="left"><img src="/public/hal.logo.png" alt="hal" /></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <style type="text/css">
+                    .nav-tabs > li {
+                        margin-bottom: -2px;
+                    }
+                    .dropdown:hover>.dropdown-menu {
+                        display: block;
+                    }
+                </style>
+                <div id="global-navigation" class="sidebar-nav" role="navigation">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="/"  >Accueil</a></li>
+                        <li class=""><a href="/submit/index"  >Dépôt</a></li>
+                        <li class="dropdown ">
+                            <a href="/section/list2" class="dropdown-toggle" data-toggle="dropdown">Consultation<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/browse/last"  >Les derniers dépôts</a></li>
+                                <li><a href="/browse/doctype"  >Par type de publication</a></li>
+                                <li><a href="/browse/domain"  >Par discipline</a></li>
+                                <li><a href="/browse/period"  >Par année de publication</a></li>
+                                <li><a href="/browse/structure"  >Par structure de recherche</a></li>
+                                <li><a href="/browse/portal"  >Les portails de l'archive</a></li>
+                                <li><a href="/browse/collection"  >Les collections</a></li>
+                            </ul>
+                        </li>
+                        <li class=""><a href="/search/index"  >Recherche</a></li>
+                        <li class=""><a href="https://doc.archives-ouvertes.fr" onclick="this.target='_blank'" >Documentation</a></li>
+                    </ul>
+                </div>            <div class="corps">
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            Accueil                            </li>
+                    </ol>                <div id="flash-messages">
+                    </div>
+                    <table width="100%">
+                        <tbody>
+                        <tr>
+                            <td style="text-align: justify;" valign="top" width="63%">
+                                <p style="text-align: center;">&nbsp;</p>
+                                <h3 class="home-title">&nbsp;Archive ouverte HAL</h3>
+                                <p>L'archive ouverte pluridisciplinaire <strong>HAL</strong>, est destin&eacute;e au d&eacute;p&ocirc;t et &agrave; la diffusion d'articles scientifiques de niveau recherche, publi&eacute;s ou non, et de th&egrave;ses, &eacute;manant des &eacute;tablissements d'enseignement et de recherche fran&ccedil;ais ou &eacute;trangers, des laboratoires publics ou priv&eacute;s.</p>
+                                <p><strong>&Agrave; l'attention du d&eacute;posant</strong></p>
+                                <ul>
+                                    <li>Le d&eacute;p&ocirc;t du texte int&eacute;gral est effectu&eacute; en accord avec les co-auteurs et dans le respect de la politique des &eacute;diteurs</li>
+                                    <li>La mise en ligne est assujettie &agrave; une mod&eacute;ration, la direction de HAL se r&eacute;servant le droit de refuser les articles ne correspondant pas aux crit&egrave;res de l'archive</li>
+                                    <li>Tout d&eacute;p&ocirc;t est d&eacute;finitif, aucun retrait ne sera effectu&eacute; apr&egrave;s la mise en ligne de l'article</li>
+                                    <li>Les fichiers textes au format pdf ou les fichiers images composant votre d&eacute;p&ocirc;t sont maintenant envoy&eacute;s au CINES dans un contexte d'archivage &agrave; long terme.</li>
+                                </ul>
+                                <p><strong>&Agrave; l'attention des lecteurs</strong></p>
+                                <ul>
+                                    <li>Dans un contexte de diffusion &eacute;lectronique, tout auteur conserve ses droits intellectuels, notamment le fait de devoir &ecirc;tre correctement cit&eacute; et reconnu comme l'auteur d'un document.</li>
+                                </ul>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%  for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+        {% block body %}{% endblock %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(document.body).tooltip({ selector: '[data-toggle="tooltip"]' , html: true, container: 'body'});
+            });
+        </script>
+
+        <script type="text/javascript">
+            var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik-hal.ccsd.cnrs.fr/" : "http://piwik-hal.ccsd.cnrs.fr/");
+            document.write(decodeURI("%3Cscript src=\'" + pkBaseURL + "piwik.js\' type=\'text/javascript\'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            try {
+                var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 17);
+                piwikTracker.trackPageView();
+                piwikTracker.enableLinkTracking();
+                //Archive HAL
+                var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 92);
+                piwikTracker.trackPageView();
+                piwikTracker.enableLinkTracking();
+            } catch( err ) {}
+        </script><noscript>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
