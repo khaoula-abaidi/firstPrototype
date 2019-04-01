@@ -39,7 +39,7 @@ class ContributorController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contributor);
             $entityManager->flush();
-
+            $this->addFlash('success','Votre compte est crée');
             return $this->redirectToRoute('contributor_index');
         }
 
@@ -69,7 +69,7 @@ class ContributorController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success','Votre compte est mis à jour');
             return $this->redirectToRoute('contributor_index', [
                 'id' => $contributor->getId(),
             ]);
@@ -90,6 +90,7 @@ class ContributorController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($contributor);
             $entityManager->flush();
+            $this->addFlash('success','Votre compte est supprimé');
         }
 
         return $this->redirectToRoute('contributor_index');
@@ -126,10 +127,10 @@ class ContributorController extends AbstractController
         ]);
     }
     /**
-     * @Route("/contributor/{id}", name ="contributor_authentification")
+     * @Route("/contributor/{id}", name ="contributor_validation_connexion")
      * @return Response
      */
-    public function authentification($id) : Response
+    public function validation($id) : Response
     {
         $contributor = $this->getDoctrine()
                             ->getRepository(Contributor::class)
@@ -139,7 +140,7 @@ class ContributorController extends AbstractController
         }
         return $this->render('contributor/index.html.twig', [
             'controller_name' => 'ContributorController',
-            'contributor' => $contributor
+            'contributor' => $contributor,
         ]);
     }
 }

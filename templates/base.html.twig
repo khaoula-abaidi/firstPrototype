@@ -183,8 +183,14 @@
                     <ol class="breadcrumb">
                         <li class="active">
                             Accueil                            </li>
-                    </ol>                <div id="flash-messages">
+                    </ol>
+                    {%  for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
                     </div>
+                    {% endfor %}
+
+
                     <table width="100%">
                         <tbody>
                         <tr>
@@ -212,11 +218,7 @@
             </div>
         </div>
     </div>
-    {%  for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+
         {% block body %}{% endblock %}
         <script type="text/javascript">
             $(document).ready(function () {

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentController extends AbstractController
 {
     /**
-     * @Route("/", name="document_index", methods={"GET"})
+     * @Route("/document/", name="document_index", methods={"GET"})
      */
     public function index(DocumentRepository $documentRepository): Response
     {
@@ -26,7 +26,7 @@ class DocumentController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="document_new", methods={"GET","POST"})
+     * @Route("/document/new", name="document_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +49,7 @@ class DocumentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="document_show", methods={"GET"})
+     * @Route("/document/{id}", name="document_show", methods={"GET"})
      */
     public function show(Document $document): Response
     {
@@ -59,7 +59,7 @@ class DocumentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="document_edit", methods={"GET","POST"})
+     * @Route("/document/{id}/edit", name="document_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Document $document): Response
     {
@@ -81,7 +81,7 @@ class DocumentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="document_delete", methods={"DELETE"})
+     * @Route("/document/{id}", name="document_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Document $document): Response
     {

@@ -17,12 +17,10 @@ class ConnexionContributorType extends AbstractType
         $builder
             ->add('login',TextType::class,[
                                                         'label' => 'Login',
-                                                        'help' => 'Le login est obligatoire',
                                                         'required' => true
                                                     ])
             ->add('pwd',PasswordType::class,[
-                                                        'label' => 'Le Mot de passe est obligatoire',
-                                                        'help' => 'Le mot de passe est obligatoire',
+                                                        'label' => 'Mot de passe',
                                                         'required' => true
 
                                                         ])
