@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Decision Waiting{% endblock %}
+
+{% block body %}
+    <h1>Les Documents non encore publiés sur HAL</h1>
+    <table class="table">
+        <tbody>
+        {% for decision in decisions %}
+        <tr>
+            <th>Id</th>
+            <td>{{ decision.id }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ decision.content }}</td>
+        </tr>
+        <tr>
+            <th>AllowedAt</th>
+            <td>{{ decision.allowedAt ? decision.allowedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>IsTaken</th>
+            <td>{{ decision.isTaken ? 'Yes' : 'No' }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

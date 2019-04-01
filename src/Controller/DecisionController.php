@@ -10,9 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/decision")
- */
+
 class DecisionController extends AbstractController
 {
     /**
@@ -24,7 +22,17 @@ class DecisionController extends AbstractController
             'decisions' => $decisionRepository->findAll(),
         ]);
     }
-
+    /**
+     * @Route("decision/waiting", name = "decisionsWaiting")
+     * @return Response
+     */
+    public function waiting(DecisionRepository $decisionRepository): Response
+    {
+        $decisions = $decisionRepository->findBy(['isTaken'=>false]);
+        return $this->render('decision/waiting.html.twig',[
+            'decisions' => $decisions
+        ]);
+    }
     /**
      * @Route("decision/new", name="decision_new", methods={"GET","POST"})
      */
@@ -93,4 +101,6 @@ class DecisionController extends AbstractController
 
         return $this->redirectToRoute('decision_index');
     }
+
+
 }
