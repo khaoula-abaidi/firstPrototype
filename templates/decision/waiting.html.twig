@@ -16,13 +16,20 @@
             <td>{{ decision.content }}</td>
         </tr>
         <tr>
-            <th>AllowedAt</th>
-            <td>{{ decision.allowedAt ? decision.allowedAt|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        <tr>
-            <th>IsTaken</th>
-            <td>{{ decision.isTaken ? 'Yes' : 'No' }}</td>
-        </tr>
+       <td> <table class="table">
+               {% for document in decision.getDocuments() %}
+               <tr><th>Document</th>
+                   <td>{{ document.id }}</td>
+               </tr>
+               {% endfor %}
+               {% for contributor in decision.getContributors() %}
+               <tr><th>Contributor</th>
+                   <td>{{ contributor.getLogin }}</td>
+               </tr>
+               {% endfor %}
+           </table>
+               </td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>

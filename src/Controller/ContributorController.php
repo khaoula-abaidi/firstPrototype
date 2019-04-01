@@ -24,15 +24,13 @@ class ContributorController extends AbstractController
      * @param DecisionRepository $decisionRepository
      * @return Response
      */
-    public function waiting(Decision $decision,DecisionRepository $repository, $id):Response
+    public function waiting(DecisionRepository $repository, $id):Response
     {
 
-        $decisionsW = $repository->findBy(['isTaken' => false]);
-        $decisionsW =
-        $decision->getDocuments();
+        $decisions = $repository->findBy(['isTaken' => false]);
 
         return $this->render('contributor/waiting.html.twig',[
-            'documents' => $documents
+            'decisions' => $decisions
             ]
         );
     }
