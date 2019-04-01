@@ -17,15 +17,15 @@ class Contributor extends Fixture
         for ($i = 0; $i < 10; $i++) {
             $contributor = new \App\Entity\Contributor();
             $contributor->setFirstname($faker->firstName)
-            ->setLastname($faker->lastName)
-            ->setComplementName($faker->lastName)
-            ->setCivility('Mr')
+                ->setLastname($faker->lastName)
+                ->setComplementName($faker->lastName)
+                ->setCivility('Mr')
                 ->setEmail($faker->email)
                 ->setPhoto($faker->image())
                 ->setLogin($faker->userName)
-                ->setPwd($faker->password)
-            ;
+                ->setPwd($faker->password);
 
-        $manager->flush();
+            $manager->flush();
+        }
     }
 }
