@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DecisionController extends AbstractController
 {
     /**
-     * @Route("/", name="decision_index", methods={"GET"})
+     * @Route("decision/", name="decision_index", methods={"GET"})
      */
     public function index(DecisionRepository $decisionRepository): Response
     {
@@ -26,7 +26,7 @@ class DecisionController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="decision_new", methods={"GET","POST"})
+     * @Route("decision/new", name="decision_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +49,7 @@ class DecisionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="decision_show", methods={"GET"})
+     * @Route("decision/{id}", name="decision_show", methods={"GET"})
      */
     public function show(Decision $decision): Response
     {
@@ -59,7 +59,7 @@ class DecisionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="decision_edit", methods={"GET","POST"})
+     * @Route("decision/{id}/edit", name="decision_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Decision $decision): Response
     {
@@ -81,7 +81,7 @@ class DecisionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="decision_delete", methods={"DELETE"})
+     * @Route("decision/{id}", name="decision_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Decision $decision): Response
     {

@@ -15,6 +15,8 @@ class DecisionType extends AbstractType
             ->add('content')
             ->add('allowedAt')
             ->add('isTaken')
+            ->add('documents')
+            ->add('contributors')
         ;
     }
 
