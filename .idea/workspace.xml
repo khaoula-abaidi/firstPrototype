@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4339de9-ecc1-4804-926e-fedfd83899c4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/DecisionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DecisionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DocumentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DocumentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/DecisionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DecisionType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/firstPrototype.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/firstPrototype.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,18 +35,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="186" column="20" selection-start-line="186" selection-start-column="20" selection-end-line="186" selection-end-column="20" />
-              <folding>
-                <element signature="e#6570#6591#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/ContributorController.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -100,11 +92,44 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/DocumentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="946">
-              <caret line="83" column="15" lean-forward="true" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
+            <state relative-caret-position="360">
+              <caret line="83" column="15" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+              <folding>
+                <element signature="e#36#79#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/DataFixtures/Contributor.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+              <folding>
+                <element signature="e#36#79#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DataFixtures/Document.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -113,7 +138,7 @@
         <entry file="file://$PROJECT_DIR$/src/Controller/DecisionController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="946">
-              <caret line="83" column="15" lean-forward="true" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
+              <caret line="83" column="15" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -148,6 +173,9 @@
         <option value="$PROJECT_DIR$/src/Form/DecisionType.php" />
         <option value="$PROJECT_DIR$/src/Controller/DecisionController.php" />
         <option value="$PROJECT_DIR$/src/Controller/DocumentController.php" />
+        <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
+        <option value="$PROJECT_DIR$/src/DataFixtures/Document.php" />
+        <option value="$PROJECT_DIR$/src/DataFixtures/Contributor.php" />
       </list>
     </option>
   </component>
@@ -256,6 +284,7 @@
       <path value="$PROJECT_DIR$/vendor/ocramius/proxy-manager" />
       <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -286,13 +315,7 @@
               <item name="firstPrototype" type="b2602c69:ProjectViewProjectNode" />
               <item name="firstPrototype" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="firstPrototype" type="b2602c69:ProjectViewProjectNode" />
-              <item name="firstPrototype" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Form" type="462c0819:PsiDirectoryNode" />
+              <item name="DataFixtures" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -332,18 +355,18 @@
       <option name="presentableId" value="Default" />
       <updated>1554109790120</updated>
       <workItem from="1554109791430" duration="3522000" />
-      <workItem from="1554117930847" duration="9349000" />
+      <workItem from="1554117930847" duration="11042000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12871000" />
+    <option name="totallyTimeSpent" value="14564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="2493" height="1415" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14384961" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14384961" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -356,7 +379,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.45567653" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.45567653" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -571,14 +594,41 @@
     <entry file="file://$PROJECT_DIR$/src/Controller/DecisionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="946">
-          <caret line="83" column="15" lean-forward="true" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
+          <caret line="83" column="15" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DocumentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="946">
-          <caret line="83" column="15" lean-forward="true" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
+        <state relative-caret-position="360">
+          <caret line="83" column="15" selection-start-line="83" selection-start-column="15" selection-end-line="83" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#36#79#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/Document.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/Contributor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding>
+            <element signature="e#36#79#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
