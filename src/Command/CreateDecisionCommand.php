@@ -2,7 +2,9 @@
 
 namespace App\Command;
 
+use App\Entity\Contributor;
 use App\Entity\Decision;
+use App\Entity\Document;
 use App\Repository\ContributorRepository;
 use App\Repository\DocumentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,7 +17,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CreateDecisionCommand extends Command
 {
-    protected static $defaultName = 'CreateDecision';
+    protected static $defaultName = 'decision:create';
     private $documentRepository;
     private $contributorRepository;
     private $manager;
@@ -60,18 +62,25 @@ class CreateDecisionCommand extends Command
             /**
              * Getting the Document's informations having id = $docID
              */
-
+            /**
+             * @var Document
+             */
+            $document = new Document();
             $document = $this->documentRepository->find($docID);
             /**
              * Getting the Contributor's informations having id = $conID
              */
+            /**
+             * @var Contributor
+             */
+            $contributor = new Contributor();
             $contributor = $this->contributorRepository->find($conID);
             /**
              * Adding the new Decision (isTaken = false)
              */
             $decision = new Decision();
             $decision->setContent('En cours de construction')
-                     ->addDocument($document)
+                ->addDocument($document)
                      ->addContributor($contributor)
                      ->setAllowedAt(new \DateTime())
                      ->setIsTaken(false);
