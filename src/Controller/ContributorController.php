@@ -84,20 +84,17 @@ class ContributorController extends AbstractController
             {$docId = $document->getId();
              $decId = $document->getDecision()->getId();
              $docDOI = $document->getDoi();
+             $docTitle = $document->getTitle();
              $decContent = $document->getDecision()->getContent();
               $waitingDecisions[] = [
-                                 //   $document->getId() => $document->getDecision()->getId(),
                                        'docId' => $docId,
                                         'decId' => $decId,
-                                        //$docId => $decId,
-                                 //   $document->getDoi() => $document->getDecision()->getContent()
-                                       // $docDOI => $decContent
                                         'docDOI' => $docDOI,
+                                        'docTitle' => $docTitle,
                                         'decContent' => $decContent
                                     ];
             }
         }
-        dump($waitingDecisions);
         return $this->render('contributor/show.html.twig', [
             'contributor' => $contributor,
             'waitingDecisions' => $waitingDecisions
@@ -144,7 +141,8 @@ class ContributorController extends AbstractController
     /**
      * @Route("/contributor/login", name = "contributor_connexion")
      */
-    public function connexion(ContributorRepository $repository, Request $request){
+    public function connexion(ContributorRepository $repository, Request $request): Response
+    {
 
         $form = $this->createForm(ConnexionContributorType::class);
         $form->handleRequest($request);
@@ -170,6 +168,18 @@ class ContributorController extends AbstractController
         return $this->render('/contributor/connexion.html.twig',[
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/contributor/logout", name="contributor_logout")
+     * @return Response
+     */
+    public function logout() : Response
+    {
+        $this->addFlash('success','Déconnexion réussite');
+        return $this->render('contributor/connexion.html.twig');
+
+
     }
     /**
      * @Route("/contributor/{id}", name ="contributor_validation_connexion")

@@ -37,25 +37,41 @@
             </tr>
         </tbody>
     </table>
-    <div class="container text-center">
+    <div class="container-fluid text-center">
+        {% if waitingDecisions | length > 0  %}
         <blockquote>La liste des documents n'ayant pas encore une décision de dépôt</blockquote>
-              {% for waitDecision in waitingDecisions %}
-        <table class="table">
-            <th>Decision numéro </th>
-            <tbody>
-            <table class="table">
 
-            <tr>
-                <th>Document Id / DOI</th>
-                <td> {{ waitDecision['docId'] }}  / {{ waitDecision['docDOI'] }} </td>
-            </tr>
-            <tr>
-                <th>Decision ID / Contenu</th>
-                <td>{{ waitDecision['decId'] }} / {{ waitDecision['decContent'] }}</td>
-            </tr>
-            </table>
-            </tbody>
-        </table>
+          <table class="table">
+              <tbdody>
+              {% for waitDecision in waitingDecisions %}
+                  <th class="text-center">Document DOI</th>
+                  <th class="text-center">Titre du document</th>
+                  <th class="text-center">Etat du Dépôt</th>
+                  <th class="text-center">Voulez-vous déposer dans HAL ? </th>
+              <tr>
+
+                  <td>{{ waitDecision['docDOI'] }}</td>
+
+                  <td>{{ waitDecision['docTitle'] }}</td>
+
+                  <td>{{ waitDecision['decContent'] }}</td>
+
+                  <td>
+                      <p class="text-center">
+                          <input type="radio" name="R1" value="Oui"> Oui
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="radio" name="R1" value="Non"> Non
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="radio" name="R1" value="Ultérieurement"> Ultérieurement
+                      </p>
+                  </td>
+              </tr>
               {% endfor %}
+              </tbdody>
+          </table>
+        {% else %}
+            <blockquote>Vous n'avez aucun document en attente de dépôt</blockquote>
+        {% endif %}
     </div>
+    <a href="{{ path('contributor_connexion') }}" class="btn btn-primary my-2">Se déconnecter</a>
 {% endblock %}
