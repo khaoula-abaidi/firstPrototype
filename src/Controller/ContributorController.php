@@ -111,11 +111,15 @@ class ContributorController extends AbstractController
                                     'decAllowedAt' => $decision->getAllowedAt()
                                     ]
                 ];
+
+               
+
             }
         }
         return $this->render('contributor/show.html.twig', [
             'contributor' => $contributor,
-            'waitingDecisions' => $waitingDecisions
+            'waitingDecisions' => $waitingDecisions,
+
         ]);
     }
 
