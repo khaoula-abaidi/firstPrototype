@@ -12,19 +12,19 @@
                 <td>{{ contributor.id }}</td>
             </tr>
             <tr>
-                <th>Civility</th>
+                <th>Civilité</th>
                 <td>{{ contributor.civility }}</td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th>Nom</th>
                 <td>{{ contributor.lastname }}</td>
             </tr>
             <tr>
-                <th>Firstname</th>
+                <th>Prénom</th>
                 <td>{{ contributor.firstname }}</td>
             </tr>
             <tr>
-                <th>ComplementName</th>
+                <th>Complément du Nom</th>
                 <td>{{ contributor.complementName }}</td>
             </tr>
             <tr>
@@ -32,15 +32,9 @@
                 <td>{{ contributor.login }}</td>
             </tr>
             <tr>
-                <th>Pwd</th>
+                <th>Mot de passe</th>
                 <td>{{ contributor.pwd }}</td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('contributor_index') }}">back to list</a>
-
-    <a href="{{ path('contributor_edit', {'id': contributor.id}) }}">edit</a>
-
-    {{ include('contributor/_delete_form.html.twig') }}
 {% endblock %}

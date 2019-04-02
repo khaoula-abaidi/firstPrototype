@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Decision En attente{% endblock %}
+
+{% block body %}
+    <h1>Les Decisions en attente</h1>
+<div class="container">
+    {% for decision in decisions %}
+        <div class="col-sm-4">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ decision.id }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ decision.content }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{{ decision.allowedAt ? decision.allowedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Prise / Non Prise</th>
+                <td>{{ decision.isTaken ? 'Yes' : 'No' }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

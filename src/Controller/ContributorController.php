@@ -82,7 +82,7 @@ class ContributorController extends AbstractController
     }
 
     /**
-     * @Route("/contributor/{id}", name="contributor_delete", methods={"DELETE"})
+     * @Route("/contributor/{id}/delete", name="contributor_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Contributor $contributor): Response
     {
