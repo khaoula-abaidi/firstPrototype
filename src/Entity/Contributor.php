@@ -47,7 +47,6 @@ class Contributor
      * @ORM\Column(type="string", length=255)
      */
     private $pwd;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Decision", inversedBy="contributors")
      */

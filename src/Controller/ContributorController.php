@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Contributor;
+use App\Entity\Decision;
 use App\Form\ConnexionContributorType;
 use App\Form\ContributorType;
 use App\Repository\ContributorRepository;
+use App\Repository\DecisionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +18,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ContributorController extends AbstractController
 {
+    /**
+     * @Route("contributor/{id}/waiting", name = "contributor_waiting")
+     * @param ContributorRepository $contributorRepository
+     * @param DecisionRepository $decisionRepository
+     * @return Response
+     */
+    public function waiting(DecisionRepository $repository, $id):Response
+    {
+
+        $decisions = $repository->findBy(['isTaken' => false]);
+
+        return $this->render('contributor/waiting.html.twig',[
+            'decisions' => $decisions
+            ]
+        );
+    }
     /**
      * @Route("/contributor", name="contributor_index", methods={"GET"})
      */
@@ -112,7 +130,7 @@ class ContributorController extends AbstractController
              *Searching for contributor's having login && Pwd into the database
              * @var $contributor Contributor
              */
-            $contributor = $repository->findOneBy([
+            $contributor = $repository->findBy([
                 'login' => $login,
                 'pwd'   => $pwd
             ]);

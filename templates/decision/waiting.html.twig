@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+<<<<<<< HEAD
 {% block title %}Decision En attente{% endblock %}
 
 {% block body %}
@@ -31,5 +32,40 @@
     {% endfor %}
 </div>
 
+=======
+{% block title %}Decision Waiting{% endblock %}
+
+{% block body %}
+    <h1>Les Documents non encore publiés sur HAL</h1>
+    <table class="table">
+        <tbody>
+        {% for decision in decisions %}
+        <tr>
+            <th>Id</th>
+            <td>{{ decision.id }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ decision.content }}</td>
+        </tr>
+        <tr>
+       <td> <table class="table">
+               {% for document in decision.getDocuments() %}
+               <tr><th>Document</th>
+                   <td>{{ document.id }}</td>
+               </tr>
+               {% endfor %}
+               {% for contributor in decision.getContributors() %}
+               <tr><th>Contributor</th>
+                   <td>{{ contributor.getLogin }}</td>
+               </tr>
+               {% endfor %}
+           </table>
+               </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+>>>>>>> 8b5030a68fdfab11c2beeb701baef5baec1af8c3
 
 {% endblock %}

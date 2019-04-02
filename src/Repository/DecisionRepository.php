@@ -19,6 +19,17 @@ class DecisionRepository extends ServiceEntityRepository
         parent::__construct($registry, Decision::class);
     }
 
+    /**
+     * @return Decision[] returns an array of documents
+     */
+    public function findWaiting($id){
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.isTaken = false',
+                'id = $id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Decision[] Returns an array of Decision objects
     //  */
