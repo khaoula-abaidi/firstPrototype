@@ -21,7 +21,7 @@ class DecisionDocumentContributorType extends AbstractType
         $builder
             ->add('contributor',EntityType::class,[
                                                     'class' => Contributor::class,
-                                                    'choice_label' => 'id'
+                                                    'choice_label' => 'id',
             ])
             ->add('document',EntityType::class,[
                                                     'class' => Document::class,
@@ -36,7 +36,9 @@ class DecisionDocumentContributorType extends AbstractType
             ])
             ->add('isTaken', ChoiceType::class,[
                             'label' => 'Est publié ? ',
-                            'choices' => ['Je veux dépôser sur HAL' => true,
+                            'choices' => [
+                                          'Choisir la décision' => null,
+                                          'Je veux dépôser sur HAL' => true,
                                           'Je ne veux pas dépôser sur HAL' => false,
                                           'Ultérieurement' => null
                                          ],

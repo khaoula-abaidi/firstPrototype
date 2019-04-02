@@ -71,9 +71,28 @@
         {% endif %}
     </div>
     <a href="{{ path('contributor_connexion') }}" class="btn btn-primary my-2">Se déconnecter</a>
-    <br />
-    <h1>Formulaire de test</h1>
-  {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <br /><br />
+
+
+    <div class="container-fluid text-center">
+        {% if waitingDecisions | length > 0  %}
+            <blockquote>Affichage essai des formulaires pour chaque decision</blockquote>
+
+            <table class="table">
+                <tbdody>
+                    {% for waitDecision in waitingDecisions %}
+                              <tr>
+                                  <td>
+                                            {{ form_start(form) }}
+                                           {{ form_widget(form) }}
+                                             {{ form_end(form) }}
+                                  </td>
+                              </tr>
+                    {% endfor %}
+                </tbdody>
+            </table>
+        {% else %}
+            <blockquote>Vous n'avez aucun document en attente de dépôt</blockquote>
+        {% endif %}
+    </div>
 {% endblock %}
