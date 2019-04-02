@@ -81,10 +81,21 @@ class ContributorController extends AbstractController
         $waitingDecisions = [];
         foreach ($documents as $document){
             if($document->getDecision()->getIsTaken()==false)
+            {$docId = $document->getId();
+             $decId = $document->getDecision()->getId();
+             $docDOI = $document->getDoi();
+             $decContent = $document->getDecision()->getContent();
               $waitingDecisions[] = [
-                                    $document->getId() => $document->getDecision()->getId(),
-                                    $document->setDoi() => $document->getDecision()->getContent()
+                                 //   $document->getId() => $document->getDecision()->getId(),
+                                       'docId' => $docId,
+                                        'decId' => $decId,
+                                        //$docId => $decId,
+                                 //   $document->getDoi() => $document->getDecision()->getContent()
+                                       // $docDOI => $decContent
+                                        'docDOI' => $docDOI,
+                                        'decContent' => $decContent
                                     ];
+            }
         }
         dump($waitingDecisions);
         return $this->render('contributor/show.html.twig', [
@@ -139,22 +150,21 @@ class ContributorController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted()&& $form->isValid()){
             $data = $form->getData();
-            dump($data);
             $login = $data->getLogin();
             $pwd = $data->getPwd();
             /**
              *Searching for contributor's having login && Pwd into the database
              * @var $contributor Contributor
              */
-            $contributor = $repository->findBy([
+            $contributor = $repository->findOneBy([
                 'login' => $login,
                 'pwd'   => $pwd
             ]);
             if($contributor!==null){
                 $this->addFlash('success','Authentification réussite');
                 return $this->redirectToRoute('contributor_show',[
-                                                                                      'id' => $contributor->getId()
-                                                                                ]);
+                                                                        'id' => $contributor->getId()
+                                                                        ]);
             }
         }
         return $this->render('/contributor/connexion.html.twig',[

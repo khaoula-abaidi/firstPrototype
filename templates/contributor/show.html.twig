@@ -39,21 +39,23 @@
     </table>
     <div class="container text-center">
         <blockquote>La liste des documents n'ayant pas encore une décision de dépôt</blockquote>
+              {% for waitDecision in waitingDecisions %}
         <table class="table">
+            <th>Decision numéro </th>
             <tbody>
+            <table class="table">
 
-
-        {% for waitDecision in waitingDecisions %}
             <tr>
                 <th>Document Id / DOI</th>
-                <td>xxxxxx</td>
+                <td> {{ waitDecision['docId'] }}  / {{ waitDecision['docDOI'] }} </td>
             </tr>
             <tr>
                 <th>Decision ID / Contenu</th>
-                <td>yyyy</td>
+                <td>{{ waitDecision['decId'] }} / {{ waitDecision['decContent'] }}</td>
             </tr>
-        {% endfor %}
+            </table>
             </tbody>
         </table>
+              {% endfor %}
     </div>
 {% endblock %}
