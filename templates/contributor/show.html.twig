@@ -50,12 +50,9 @@
                   <th class="text-center">Voulez-vous déposer dans HAL ? </th>
               <tr>
 
-                  <td>{{ waitDecision['docDOI'] }}</td>
-
-                  <td>{{ waitDecision['docTitle'] }}</td>
-
-                  <td>{{ waitDecision['decContent'] }}</td>
-
+                  <td>{{ waitDecision['document']['doi'] }}</td>
+                  <td>{{ waitDecision['document']['title'] }}</td>
+                  <td>{{ waitDecision['decision']['decContent'] }}</td>
                   <td>
                       <p class="text-center">
                           <input type="radio" name="R1" value="Oui"> Oui

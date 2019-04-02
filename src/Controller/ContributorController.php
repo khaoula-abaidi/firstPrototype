@@ -81,10 +81,14 @@ class ContributorController extends AbstractController
         $waitingDecisions = [];
         foreach ($documents as $document){
             if($document->getDecision()->getIsTaken()==false)
-            {$docId = $document->getId();
-             $decId = $document->getDecision()->getId();
+            {
+                /*
+             $docId = $document->getId();
              $docDOI = $document->getDoi();
              $docTitle = $document->getTitle();
+             $docModifiedAt = $document->getModifiedAt();
+             $decId = $document->getDecision()->getId();
+             $decAllowedAt = $document->getDecision()->getAllowedAt();
              $decContent = $document->getDecision()->getContent();
               $waitingDecisions[] = [
                                        'docId' => $docId,
@@ -93,6 +97,20 @@ class ContributorController extends AbstractController
                                         'docTitle' => $docTitle,
                                         'decContent' => $decContent
                                     ];
+                */
+               $decision = $document->getDecision();
+                $waitingDecisions[] = [
+                    'document' => [
+                                    'doi' => $document->getDoi(),
+                                    'title' =>$document->getTitle(),
+                                    'modifiedAt' => $document->getModifiedAt()
+                                    ],
+                    'decision' => [
+                                    'decId' => $decision->getId(),
+                                    'decContent' => $decision->getContent(),
+                                    'decAllowedAt' => $decision->getAllowedAt()
+                                    ]
+                ];
             }
         }
         return $this->render('contributor/show.html.twig', [
