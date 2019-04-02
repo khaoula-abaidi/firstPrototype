@@ -6,6 +6,7 @@ use App\Entity\Contributor;
 use App\Entity\Decision;
 use App\Form\ConnexionContributorType;
 use App\Form\ContributorType;
+use App\Form\DecisionDocumentContributorType;
 use App\Repository\ContributorRepository;
 use App\Repository\DecisionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -71,7 +72,7 @@ class ContributorController extends AbstractController
     /**
      * @Route("/contributor/{id}", name="contributor_show", methods={"GET"})
      */
-    public function show(Contributor $contributor): Response
+    public function show(Contributor $contributor, Request $request): Response
     {
         /**
          * Searching the Contributor's Documents
@@ -112,13 +113,25 @@ class ContributorController extends AbstractController
                                     ]
                 ];
 
-               
+                    // Création du formulaire de création des résultats
+                $form = $this->createForm(DecisionDocumentContributorType::class);
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    // A voir                   $this->getDoctrine()->getManager()->flush();
+                    $this->addFlash('success','Vos décisions sont prises et sauvegardées sur HAL');
+                    return $this->redirectToRoute('contributor_index', [
+                        'id' => $contributor->getId(),
+                    ]);
+                }
+                   // fin formulaire
 
             }
         }
         return $this->render('contributor/show.html.twig', [
             'contributor' => $contributor,
             'waitingDecisions' => $waitingDecisions,
+            'form' => $form->createView()
 
         ]);
     }

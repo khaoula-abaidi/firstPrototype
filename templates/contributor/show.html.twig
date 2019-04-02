@@ -71,4 +71,9 @@
         {% endif %}
     </div>
     <a href="{{ path('contributor_connexion') }}" class="btn btn-primary my-2">Se déconnecter</a>
+    <br />
+    <h1>Formulaire de test</h1>
+  {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 {% endblock %}
