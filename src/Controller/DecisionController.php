@@ -56,20 +56,6 @@ class DecisionController extends AbstractController
         ]);
     }
     /**
-     * @Route("decision/waiting", name = "decision_waiting")
-     * @param DecisionRepository $decisionRepository
-     * @return Response
-     */
-    public function waiting(DecisionRepository $decisionRepository){
-        $decisions = $decisionRepository->findBy([
-            'isTaken' => false
-        ]);
-        return $this->render('decision/waiting.html.twig',[
-            'decisions' => $decisions
-        ]);
-    }
-
-    /**
      * @Route("decision/{id}", name="decision_show", methods={"GET"})
      */
     public function show(Decision $decision): Response

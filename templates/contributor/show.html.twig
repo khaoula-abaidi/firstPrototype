@@ -37,4 +37,23 @@
             </tr>
         </tbody>
     </table>
+    <div class="container text-center">
+        <blockquote>La liste des documents n'ayant pas encore une décision de dépôt</blockquote>
+        <table class="table">
+            <tbody>
+
+
+        {% for waitDecision in waitingDecisions %}
+            <tr>
+                <th>Document Id / DOI</th>
+                <td>xxxxxx</td>
+            </tr>
+            <tr>
+                <th>Decision ID / Contenu</th>
+                <td>yyyy</td>
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

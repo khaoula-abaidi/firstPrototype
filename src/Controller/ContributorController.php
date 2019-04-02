@@ -8,6 +8,7 @@ use App\Form\ConnexionContributorType;
 use App\Form\ContributorType;
 use App\Repository\ContributorRepository;
 use App\Repository\DecisionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,8 +73,23 @@ class ContributorController extends AbstractController
      */
     public function show(Contributor $contributor): Response
     {
+        /**
+         * Searching the Contributor's Documents
+         * Each Document's Decision that isTaken = False
+         */
+        $documents = $contributor->getDocuments();
+        $waitingDecisions = [];
+        foreach ($documents as $document){
+            if($document->getDecision()->getIsTaken()==false)
+              $waitingDecisions[] = [
+                                    $document->getId() => $document->getDecision()->getId(),
+                                    $document->setDoi() => $document->getDecision()->getContent()
+                                    ];
+        }
+        dump($waitingDecisions);
         return $this->render('contributor/show.html.twig', [
             'contributor' => $contributor,
+            'waitingDecisions' => $waitingDecisions
         ]);
     }
 
@@ -134,10 +150,11 @@ class ContributorController extends AbstractController
                 'login' => $login,
                 'pwd'   => $pwd
             ]);
-            dump($contributor);
             if($contributor!==null){
                 $this->addFlash('success','Authentification réussite');
-                return $this->redirectToRoute('contributor_show',['id'=> $contributor->getId()]);
+                return $this->redirectToRoute('contributor_show',[
+                                                                                      'id' => $contributor->getId()
+                                                                                ]);
             }
         }
         return $this->render('/contributor/connexion.html.twig',[
