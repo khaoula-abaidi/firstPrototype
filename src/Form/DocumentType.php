@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Document;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,11 +26,22 @@ class DocumentType extends AbstractType
                                                     'label' => 'Résumé'
                                                     ])
             ->add('createdAt',DateTimeType::class,[
-                                                    'label' => 'Date de publication'
+                                                    'label' => 'Date de publication',
+                                                    'widget' => 'single_text'
             ])
-            ->add('modifiedAt')
-            ->add('decision')
-            ->add('contributors')
+            ->add('modifiedAt',DateTimeType::class,[
+                                                    'label' => 'Date de modification',
+                                                    'widget' => 'single_text'
+                                                    ])
+            ->add('decision', ChoiceType::class,[
+                                                'label'   => 'Décision à prendre',
+                                                'choices' => [
+                                                            'Choisir la décision' => null,
+                                                            'Je veux dépôser sur HAL' => true,
+                                                            'Je ne veux pas dépôser sur HAL' => false,
+                                                             'Ultérieurement' => null
+                                                            ]
+            ])
         ;
     }
 

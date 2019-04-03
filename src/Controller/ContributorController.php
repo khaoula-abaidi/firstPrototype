@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contributor;
 use App\Entity\Decision;
+use App\Entity\Document;
 use App\Form\ConnexionContributorType;
 use App\Form\ContributorType;
 use App\Form\DecisionDocumentContributorType;
@@ -82,6 +83,7 @@ class ContributorController extends AbstractController
         $documents = $contributor->getDocuments();
         $waitingDocuments = [];
         foreach ($documents as $document){
+
                     if($document->getDecision()->getIsTaken()==false)
                         {
                              $waitingDocuments[] = [ //  'document' => $document
@@ -96,6 +98,9 @@ class ContributorController extends AbstractController
                                                                      ]
                              ];
                         }
+                    else {
+                        $contributor->removeDocument($document);
+                    }
                 }
                                                             //dump($waitingDocuments);die;
                                                             //dump($documents);die;
@@ -103,11 +108,19 @@ class ContributorController extends AbstractController
          * Gerenating the Form related to the Contributor's Documents Not yet Published && Asking For publishing
          */
 
-        $form = $this->createForm(DecisionDocumentContributorType::class);
+        $form = $this->createForm(DecisionDocumentContributorType::class,$contributor);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /*$document = new Document();
+            $document->setDoi('10-878855')
+                ->setTitle('texxtfff')
+            ->setCreatedA(\DateTime::class);
+            $contributor->addDocument($document);
+            dump($document);
             // A voir                   $this->getDoctrine()->getManager()->flush();
+            */
+                                                      // dump($contributor);die;
             $this->addFlash('success','Vos décisions sont prises et sauvegardées sur HAL');
             return $this->redirectToRoute('contributor_index', [
                 'id' => $contributor->getId(),
@@ -116,7 +129,7 @@ class ContributorController extends AbstractController
         // fin formulaire
 
 
-        return $this->render('contributor/show.html.twig', [
+        return $this->render('contributor/showtwo.html.twig', [
             'contributor' => $contributor,
             'waitingDocuments' => $waitingDocuments,
             /*

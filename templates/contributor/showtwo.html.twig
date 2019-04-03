@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contributor{% endblock %}
+
+{% block body %}
+    <h1>Contributor</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ contributor.id }}</td>
+        </tr>
+        <tr>
+            <th>Civilité</th>
+            <td>{{ contributor.civility }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ contributor.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Prénom</th>
+            <td>{{ contributor.firstname }}</td>
+        </tr>
+        <tr>
+            <th>Complément du Nom</th>
+            <td>{{ contributor.complementName }}</td>
+        </tr>
+        <tr>
+            <th>Login</th>
+            <td>{{ contributor.login }}</td>
+        </tr>
+        <tr>
+            <th>Mot de passe</th>
+            <td>{{ contributor.pwd }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Formulaire des décisions -->
+
+    <div class="container-fluid text-center">
+        {% if waitingDocuments | length > 0  %}
+            <blockquote>La liste des documents n'ayant pas encore une décision de dépôt</blockquote>
+            <table class="table" id="email-fields-list"
+                                data-prototype="{{ form_widget(form.documents.vars.prototype)|e ('html_attr') }}"
+                                data-widget-tags="{{ '<tr></tr>'|e }}"
+                                data-widget-counter="{{ form.children|length }}">
+                <tbdody>
+                    <th class="text-center">Document DOI</th>
+                    <th class="text-center">Titre du document</th>
+                    <th>Etat du dépôt du document sur HAL</th>
+                    <th class="text-center">Date de la création de la décision </th>
+                    <th class="text-center">Voulez-vous déposer dans HAL ? </th>
+                    {{ form_start(form) }}
+                    {% for document in form.documents %}
+                        <tr>
+                            <td>{{ document.children.doi.vars.value }}</td>
+                            <td>{{ document.children.title.vars.value }}</td>
+                            <td>{{ document.children.decision.vars.data.content }}</td>
+                            <td>{{ document.children.createdAt.vars.value | date('Y-m-d H:i:s') }}</td>
+                            <td>
+                                <p>
+                                    <input type="radio" value="false" name="{{ document.children.doi.vars.value }}">
+                                    {{ document.children.decision.vars.choices[0].label }}
+                                    <input type="radio" value="false" name="{{ document.children.doi.vars.value }}">
+                                    {{ document.children.decision.vars.choices[1].label }}
+                                    <input type="radio" value="false" name="{{ document.children.doi.vars.value }}">
+                                    {{ document.children.decision.vars.choices[2].label }}
+                                    <input type="radio" value="false" name="{{ document.children.doi.vars.value }}">
+                                    {{ document.children.decision.vars.choices[3].label }}
+                                </p>
+                            </td>
+                        </tr>
+                        {{ form_row(document) }}
+                    {% endfor %}
+                </tbdody>
+            </table>
+            {{ form_end(form) }}
+        {% else %}
+            <blockquote>Vous n'avez aucun document en attente de dépôt</blockquote>
+        {% endif %}
+    </div>
+
+    <!-- Fin Formulaire -->
+
+
+    <a href="{{ path('contributor_connexion') }}" class="btn btn-primary my-2">Se déconnecter</a>
+
+{% endblock %}
+
+

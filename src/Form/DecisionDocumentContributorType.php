@@ -8,6 +8,7 @@ use App\Entity\Document;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
@@ -38,31 +39,20 @@ class DecisionDocumentContributorType extends AbstractType
                 'label' => 'Déposer dans HAL'
             ])
            */
-           ->add('doi', TextType::class,[
-                                                     'label' => 'DOI : '
-                                                     ])
-            ->add('title',TextType::class,[
-                                                    'label' => 'Titre du Document : '
-                                                     ])
-            ->add('content',TextType::class,[
-                                                    'label' => 'Contenu Décision'
-                                                     ])
-            ->add('allowedAt',DateTimeType::class,[
-                                                    'widget' => 'single_text'
-                                                    ])
-            ->add('isTaken', ChoiceType::class,[
-                                                        'label' => 'Est publié ? ',
-                                                        'choices' => [
-                                                                    'Choisir la décision' => null,
-                                                                    'Je veux dépôser sur HAL' => true,
-                                                                    'Je ne veux pas dépôser sur HAL' => false,
-                                                                    'Ultérieurement' => null
-                                                                    ],
-                                                        'required' => false
-                                                    ])
+            ->add('documents', CollectionType::class, [
+                // each entry in the array will be an "isTaken" field
+                                'entry_type' => DocumentType::class,
+                // these options are passed to each "email" type
+                                'by_reference' => false,
+                                'allow_add' => true,
+                                'allow_delete' => true
+                                             ])
             ->add('save',SubmitType::class,[
-                'label' => 'Valider'
-            ])
+                                'label' => 'Valider les décisions',
+                                'attr' => [
+                                            'class' => 'btn btn-success'
+                                         ]
+                                            ])
             ->add('reset',ResetType::class,[
                 'label' => 'Annuler'
             ])

@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,11 +48,10 @@ class ContributorType extends AbstractType
                                                 'required' => true
 
                                             ])
-            ->add('decision')
             ->add('documents')
             ->add('save',SubmitType::class,[
                                                 'label' => 'Créer le compte'
-            ])
+                                           ])
         ;
     }
 
