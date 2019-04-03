@@ -8,9 +8,11 @@ use App\Entity\Document;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,6 +21,7 @@ class DecisionDocumentContributorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+           /*
             ->add('contributor',EntityType::class,[
                                                     'class' => Contributor::class,
                                                     'choice_label' => 'id',
@@ -34,16 +37,29 @@ class DecisionDocumentContributorType extends AbstractType
             ->add('save',SubmitType::class,[
                 'label' => 'Déposer dans HAL'
             ])
+           */
+           ->add('doi', TextType::class,[
+                                                     'label' => 'DOI : '
+                                                     ])
+            ->add('title',TextType::class,[
+                                                    'label' => 'Titre du Document : '
+                                                     ])
+            ->add('content',TextType::class,[
+                                                    'label' => 'Contenu Décision'
+                                                     ])
+            ->add('allowedAt',DateTimeType::class,[
+                                                    'widget' => 'single_text'
+                                                    ])
             ->add('isTaken', ChoiceType::class,[
-                            'label' => 'Est publié ? ',
-                            'choices' => [
-                                          'Choisir la décision' => null,
-                                          'Je veux dépôser sur HAL' => true,
-                                          'Je ne veux pas dépôser sur HAL' => false,
-                                          'Ultérieurement' => null
-                                         ],
-                            'required' => false
-            ])
+                                                        'label' => 'Est publié ? ',
+                                                        'choices' => [
+                                                                    'Choisir la décision' => null,
+                                                                    'Je veux dépôser sur HAL' => true,
+                                                                    'Je ne veux pas dépôser sur HAL' => false,
+                                                                    'Ultérieurement' => null
+                                                                    ],
+                                                        'required' => false
+                                                    ])
             ->add('save',SubmitType::class,[
                 'label' => 'Valider'
             ])
@@ -56,7 +72,7 @@ class DecisionDocumentContributorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Contributor::class
         ]);
     }
 }

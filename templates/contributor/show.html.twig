@@ -37,22 +37,27 @@
             </tr>
         </tbody>
     </table>
+
+                <!-- Formulaire des décisions -->
+
     <div class="container-fluid text-center">
-        {% if waitingDecisions | length > 0  %}
+        {% if waitingDocuments | length > 0  %}
         <blockquote>La liste des documents n'ayant pas encore une décision de dépôt</blockquote>
 
           <table class="table">
               <tbdody>
-              {% for waitDecision in waitingDecisions %}
+              {% for waitDocument in waitingDocuments %}
                   <th class="text-center">Document DOI</th>
                   <th class="text-center">Titre du document</th>
                   <th class="text-center">Etat du Dépôt</th>
+                  <th class="text-center">Date de la dernière décision </th>
                   <th class="text-center">Voulez-vous déposer dans HAL ? </th>
               <tr>
 
-                  <td>{{ waitDecision['document']['doi'] }}</td>
-                  <td>{{ waitDecision['document']['title'] }}</td>
-                  <td>{{ waitDecision['decision']['decContent'] }}</td>
+                  <td>{{ waitDocument['document']['doi'] }}</td>
+                  <td>{{ waitDocument['document']['title'] }}</td>
+                  <td>{{ waitDocument['document']['decisionContent'] }}</td>
+                  <td>{{ waitDocument['document']['dateCreationDecision'] | date('Y-m-d H:i:S') }}</td>
                   <td>
                       <p class="text-center">
                           <input type="radio" name="R1" value="Oui"> Oui
@@ -70,17 +75,22 @@
             <blockquote>Vous n'avez aucun document en attente de dépôt</blockquote>
         {% endif %}
     </div>
+
+
+     <!-- Fin Formulaire -->
+
+
     <a href="{{ path('contributor_connexion') }}" class="btn btn-primary my-2">Se déconnecter</a>
     <br /><br />
 
 
     <div class="container-fluid text-center">
-        {% if waitingDecisions | length > 0  %}
+        {% if waitingDocuments | length > 0  %}
             <blockquote>Affichage essai des formulaires pour chaque decision</blockquote>
 
             <table class="table">
                 <tbdody>
-                    {% for waitDecision in waitingDecisions %}
+                    {% for waitDocument in waitingDocuments %}
                               <tr>
                                   <td>
                                             {{ form_start(form) }}

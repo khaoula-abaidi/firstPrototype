@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Contributor;
+use App\Entity\Decision;
+use App\Entity\Document;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,6 +21,23 @@ class ContributorRepository extends ServiceEntityRepository
         parent::__construct($registry, Contributor::class);
     }
 
+
+
+      /**
+       *@return Document[] Returns an array of Document objects
+
+
+    public function findWaitingDocuments($id,$dec)
+    {
+        return $this->createQueryBuilder('c')
+            ->where("c.id = $id")
+            ->andWhere("c.decision = $dec")
+            ->andWhere("c.decision.isTaken = false")
+            ->getQuery()
+            ->getResult();
+
+    }
+       */
     // /**
     //  * @return Contributor[] Returns an array of Contributor objects
     //  */

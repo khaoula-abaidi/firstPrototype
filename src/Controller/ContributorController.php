@@ -72,65 +72,56 @@ class ContributorController extends AbstractController
     /**
      * @Route("/contributor/{id}", name="contributor_show", methods={"GET"})
      */
-    public function show(Contributor $contributor, Request $request): Response
+    public function show(Contributor $contributor, Request $request,ContributorRepository $contributorRepository): Response
     {
         /**
          * Searching the Contributor's Documents
          * Each Document's Decision that isTaken = False
          */
+                     //   $documents = $contributor->getDocuments();
         $documents = $contributor->getDocuments();
-        $waitingDecisions = [];
+        $waitingDocuments = [];
         foreach ($documents as $document){
-            if($document->getDecision()->getIsTaken()==false)
-            {
-                /*
-             $docId = $document->getId();
-             $docDOI = $document->getDoi();
-             $docTitle = $document->getTitle();
-             $docModifiedAt = $document->getModifiedAt();
-             $decId = $document->getDecision()->getId();
-             $decAllowedAt = $document->getDecision()->getAllowedAt();
-             $decContent = $document->getDecision()->getContent();
-              $waitingDecisions[] = [
-                                       'docId' => $docId,
-                                        'decId' => $decId,
-                                        'docDOI' => $docDOI,
-                                        'docTitle' => $docTitle,
-                                        'decContent' => $decContent
-                                    ];
-                */
-               $decision = $document->getDecision();
-                $waitingDecisions[] = [
-                    'document' => [
-                                    'doi' => $document->getDoi(),
-                                    'title' =>$document->getTitle(),
-                                    'modifiedAt' => $document->getModifiedAt()
-                                    ],
-                    'decision' => [
-                                    'decId' => $decision->getId(),
-                                    'decContent' => $decision->getContent(),
-                                    'decAllowedAt' => $decision->getAllowedAt()
-                                    ]
-                ];
+                    if($document->getDecision()->getIsTaken()==false)
+                        {
+                             $waitingDocuments[] = [ //  'document' => $document
+                                                    'document' => [
 
-                    // Création du formulaire de création des résultats
-                $form = $this->createForm(DecisionDocumentContributorType::class);
-                $form->handleRequest($request);
+                                                                    'doi' => $document->getDoi(),
+                                                                    'title' => $document->getTitle(),
+                                                                    'decisionContent' => $document->getDecision()->getContent(),
+                                                                    'isTaken' => $document->getDecision()->getIsTaken(),
+                                                                    'dateCreationDecision' => $document->getDecision()->getAllowedAt()
 
-                if ($form->isSubmitted() && $form->isValid()) {
-                    // A voir                   $this->getDoctrine()->getManager()->flush();
-                    $this->addFlash('success','Vos décisions sont prises et sauvegardées sur HAL');
-                    return $this->redirectToRoute('contributor_index', [
-                        'id' => $contributor->getId(),
-                    ]);
+                                                                     ]
+                             ];
+                        }
                 }
-                   // fin formulaire
+                                                            //dump($waitingDocuments);die;
+                                                            //dump($documents);die;
+        /**
+         * Gerenating the Form related to the Contributor's Documents Not yet Published && Asking For publishing
+         */
 
-            }
+        $form = $this->createForm(DecisionDocumentContributorType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // A voir                   $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success','Vos décisions sont prises et sauvegardées sur HAL');
+            return $this->redirectToRoute('contributor_index', [
+                'id' => $contributor->getId(),
+            ]);
         }
+        // fin formulaire
+
+
         return $this->render('contributor/show.html.twig', [
             'contributor' => $contributor,
+            'waitingDocuments' => $waitingDocuments,
+            /*
             'waitingDecisions' => $waitingDecisions,
+            */
             'form' => $form->createView()
 
         ]);
