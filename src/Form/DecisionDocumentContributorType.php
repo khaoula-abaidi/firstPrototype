@@ -23,12 +23,11 @@ class DecisionDocumentContributorType extends AbstractType
     {
         $builder
             ->add('save',SubmitType::class,[
-                'label' => 'Valider les décisions',
-
-            ])
+                                'label' => 'Valider les décisions',
+                            ])
             ->add('reset',ResetType::class,[
-                'label' => 'Annuler'
-            ])
+                                 'label' => 'Annuler'
+                             ])
         ;
     }
 

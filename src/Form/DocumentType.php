@@ -16,7 +16,9 @@ class DocumentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('doi',TextType::class,[
+            /*
+             *
+             ->add('doi',TextType::class,[
                                                     'label' => 'DOI (Digital Object Identifier)'
                                                     ])
             ->add('title',TextType::class,[
@@ -33,15 +35,8 @@ class DocumentType extends AbstractType
                                                     'label' => 'Date de modification',
                                                     'widget' => 'single_text'
                                                     ])
-            ->add('decision', ChoiceType::class,[
-                                                'label'   => 'Décision à prendre',
-                                                'choices' => [
-                                                            'Choisir la décision' => null,
-                                                            'Je veux dépôser sur HAL' => true,
-                                                            'Je ne veux pas dépôser sur HAL' => false,
-                                                             'Ultérieurement' => null
-                                                            ]
-            ])
+            */
+            ->add('decision',DecisionType::class)
         ;
     }
 

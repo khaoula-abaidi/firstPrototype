@@ -62,6 +62,7 @@
                             <td>{{ document.decision.content }}</td>
                             <td>{{ document.decision.allowedAt | date('Y-m-d à H:i:s') }}</td>
                             <td>
+
                                 <select name="{{ document.decision.id }}_{{ document.id }}_{{ contributor.id }}">
                                     <option>Choisir la décision</option>
                                     <option value="true">Oui, Je veux dépôser sur HAL</option>
@@ -69,6 +70,9 @@
                                     <option value="null">Ultérieurement</option>
                                 </select>
                             </td>
+                        </tr>
+                        <tr>
+
                         </tr>
                     {% endfor %}
                 </tbdody>
@@ -84,7 +88,11 @@
 
 
     <a href="{{ path('contributor_logout') }}" class="btn btn-primary my-2">Se déconnecter</a>
-    <br /><br />
-
-
+<br /><br /><br/>
+    <h1>Formulaire de Test</h1>
+    <ul>
+        {% for formu in forms %}
+            <li>{{ dump(formu) }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

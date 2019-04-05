@@ -8,10 +8,15 @@ use App\Entity\Document;
 use App\Form\ConnexionContributorType;
 use App\Form\ContributorType;
 use App\Form\DecisionDocumentContributorType;
+use App\Form\DecisionType;
+use App\Form\DocumentType;
 use App\Repository\ContributorRepository;
 use App\Repository\DecisionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -82,14 +87,45 @@ class ContributorController extends AbstractController
         /**
          * Gerenating the Form related to the Contributor's Documents Not yet Published && Asking For publishing
          */
+        $decisions = [];
         foreach ($contributor->getDocuments() as $document)
         {
             if($document->getDecision()->getIsTaken()==true)
-            {$contributor->removeDocument($document);}
+                           {$contributor->removeDocument($document);}
+            else $decisions[] = $document->getDecision();
         }
+           //dump($decisions);die;
         $form = $this->createForm(DecisionDocumentContributorType::class,$contributor);
         $form->handleRequest($request);
 
+
+
+
+        // Formulaire de test
+
+        $forms = [];
+        foreach ($decisions as $decision) {
+            $forms[] = $this->createFormBuilder($decision)
+                ->add('isTaken', ChoiceType::class,[
+                                                     'label'   => false,
+                                                     'choices' => [
+                                                                    'Choisir la décision' => null,
+                                                                    'Je veux dépôser sur HAL' => true,
+                                                                    'Je ne veux pas dépôser sur HAL' => false,
+                                                                    'Ultérieurement' => null
+                                                                ]
+                                                        ])
+                ->getForm();
+        }
+                                    // dump($forms);die;
+
+
+
+
+
+
+
+        // fin formulaire de test
         // dump($form->getData());die;
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -104,7 +140,12 @@ class ContributorController extends AbstractController
             /*
             'waitingDecisions' => $waitingDecisions,
             */
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'forms' =>array_map(function ($form1)
+                                        {
+                                            return $form1->createView();
+                                            },
+                                $forms)
         ]);
     }
 
