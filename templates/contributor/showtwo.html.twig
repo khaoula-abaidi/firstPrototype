@@ -43,41 +43,38 @@
     <div class="container-fluid text-center">
         {% if waitingDocuments | length > 0  %}
             <blockquote>La liste des documents n'ayant pas encore une décision de dépôt</blockquote>
-            <table class="table" id="email-fields-list"
-                                data-prototype="{{ form_widget(form.documents.vars.prototype)|e ('html_attr') }}"
-                                data-widget-tags="{{ '<tr></tr>'|e }}"
-                                data-widget-counter="{{ form.children|length }}">
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+            <table class="table" data-prototype="{{ form_widget(form.documents.vars.prototype)|e ('html_attr') }}"
+                                 data-widget-tags="{{ '<tr></tr>'|e }}"
+                                 data-widget-counter="{{ form.children|length }}">
                 <tbdody>
                     <th class="text-center">Document DOI</th>
                     <th class="text-center">Titre du document</th>
                     <th>Etat du dépôt du document sur HAL</th>
                     <th class="text-center">Date de la création de la décision </th>
                     <th class="text-center">Voulez-vous déposer dans HAL ? </th>
-                    {{ form_start(form) }}
+
                     {% for document in form.documents %}
                         <tr>
-                            <td>{{ document.children.doi.vars.value }}</td>
-                            <td>{{ document.children.title.vars.value }}</td>
-                            <td>{{ document.children.decision.vars.data.content }}</td>
-                            <td>{{ document.children.createdAt.vars.value | date('Y-m-d H:i:s') }}</td>
+                            <td>{{ document.vars.value.doi }}</td>
+                            <td>{{ document.vars.value.title }}</td>
+                            <td>{{ document.vars.value.decision.content }}</td>
+                            <td>{{ document.vars.value.createdAt | date('Y-m-d H:i:s') }}</td>
                             <td>
-                                <p>
-                                    <input type="radio" value="false" name="{{ document.children.doi.vars.value }}">
-                                    {{ document.children.decision.vars.choices[0].label }}
-                                    <input type="radio" value="false" name="{{ document.children.doi.vars.value }}">
-                                    {{ document.children.decision.vars.choices[1].label }}
-                                    <input type="radio" value="false" name="{{ document.children.doi.vars.value }}">
-                                    {{ document.children.decision.vars.choices[2].label }}
-                                    <input type="radio" value="false" name="{{ document.children.doi.vars.value }}">
-                                    {{ document.children.decision.vars.choices[3].label }}
-                                </p>
+                                    <select name="D1">
+                                                 <option>{{ document.children.decision.vars.choices[0].label }}</option>
+                                                 <option>{{ document.children.decision.vars.choices[1].label }}</option>
+                                                 <option>{{ document.children.decision.vars.choices[2].label }}</option>
+                                                 <option>{{ document.children.decision.vars.choices[3].label }}</option>
+                                    </select>
                             </td>
                         </tr>
-                        {{ form_row(document) }}
                     {% endfor %}
+
                 </tbdody>
             </table>
-            {{ form_end(form) }}
+
         {% else %}
             <blockquote>Vous n'avez aucun document en attente de dépôt</blockquote>
         {% endif %}
@@ -87,6 +84,7 @@
 
 
     <a href="{{ path('contributor_connexion') }}" class="btn btn-primary my-2">Se déconnecter</a>
+
 
 {% endblock %}
 

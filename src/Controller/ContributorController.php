@@ -76,67 +76,35 @@ class ContributorController extends AbstractController
     public function show(Contributor $contributor, Request $request,ContributorRepository $contributorRepository): Response
     {
         /**
-         * Searching the Contributor's Documents
-         * Each Document's Decision that isTaken = False
+         * Searching the Contributor's Document's where Decision's  False
          */
-                     //   $documents = $contributor->getDocuments();
-        $documents = $contributor->getDocuments();
-        $waitingDocuments = [];
-        foreach ($documents as $document){
-
-                    if($document->getDecision()->getIsTaken()==false)
-                        {
-                             $waitingDocuments[] = [ //  'document' => $document
-                                                    'document' => [
-
-                                                                    'doi' => $document->getDoi(),
-                                                                    'title' => $document->getTitle(),
-                                                                    'decisionContent' => $document->getDecision()->getContent(),
-                                                                    'isTaken' => $document->getDecision()->getIsTaken(),
-                                                                    'dateCreationDecision' => $document->getDecision()->getAllowedAt()
-
-                                                                     ]
-                             ];
-                        }
-                    else {
-                        $contributor->removeDocument($document);
-                    }
-                }
-                                                            //dump($waitingDocuments);die;
-                                                            //dump($documents);die;
+        $waitingDocuments  = $contributorRepository->findAllWaiting($contributor->getId());
         /**
          * Gerenating the Form related to the Contributor's Documents Not yet Published && Asking For publishing
          */
-
+        foreach ($contributor->getDocuments() as $document)
+        {
+            if($document->getDecision()->getIsTaken()==true)
+            {$contributor->removeDocument($document);}
+        }
         $form = $this->createForm(DecisionDocumentContributorType::class,$contributor);
         $form->handleRequest($request);
 
+        // dump($form->getData());die;
         if ($form->isSubmitted() && $form->isValid()) {
-            /*$document = new Document();
-            $document->setDoi('10-878855')
-                ->setTitle('texxtfff')
-            ->setCreatedA(\DateTime::class);
-            $contributor->addDocument($document);
-            dump($document);
-            // A voir                   $this->getDoctrine()->getManager()->flush();
-            */
-                                                      // dump($contributor);die;
+
             $this->addFlash('success','Vos décisions sont prises et sauvegardées sur HAL');
             return $this->redirectToRoute('contributor_index', [
                 'id' => $contributor->getId(),
             ]);
+
         }
-        // fin formulaire
-
-
-        return $this->render('contributor/showtwo.html.twig', [
+        return $this->render('contributor/show.html.twig', [
             'contributor' => $contributor,
-            'waitingDocuments' => $waitingDocuments,
             /*
             'waitingDecisions' => $waitingDecisions,
             */
             'form' => $form->createView()
-
         ]);
     }
 
@@ -219,22 +187,5 @@ class ContributorController extends AbstractController
         return $this->render('contributor/connexion.html.twig');
 
 
-    }
-    /**
-     * @Route("/contributor/{id}", name ="contributor_validation_connexion")
-     * @return Response
-     */
-    public function validation($id) : Response
-    {
-        $contributor = $this->getDoctrine()
-                            ->getRepository(Contributor::class)
-                            ->find($id);
-        if(!$contributor){
-            return $this->render('contributor/error.html.twig');
-        }
-        return $this->render('contributor/index.html.twig', [
-            'controller_name' => 'ContributorController',
-            'contributor' => $contributor,
-        ]);
     }
 }

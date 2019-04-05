@@ -22,7 +22,21 @@ class ContributorRepository extends ServiceEntityRepository
     }
 
 
-
+    /**
+     * @return Document[] Returns an array of Contributor objects
+     */
+    public function findAllWaiting($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->where("c.id = $id")
+            ->innerJoin('c.documents','documents')
+            ->innerJoin('c.decision','decision')
+            //    ->andWhere('decision.isTaken = false')
+            ->andWhere("decision.content = 'En attente de construction'")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
       /**
        *@return Document[] Returns an array of Document objects
 

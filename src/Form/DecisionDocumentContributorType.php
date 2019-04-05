@@ -22,37 +22,10 @@ class DecisionDocumentContributorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-           /*
-            ->add('contributor',EntityType::class,[
-                                                    'class' => Contributor::class,
-                                                    'choice_label' => 'id',
-            ])
-            ->add('document',EntityType::class,[
-                                                    'class' => Document::class,
-                                                    'choice_label' => 'id'
-            ])
-            ->add('decision',EntityType::class,[
-                                                    'class' => Decision::class,
-                                                    'choice_label' =>'id'
-            ])
             ->add('save',SubmitType::class,[
-                'label' => 'Déposer dans HAL'
+                'label' => 'Valider les décisions',
+
             ])
-           */
-            ->add('documents', CollectionType::class, [
-                // each entry in the array will be an "isTaken" field
-                                'entry_type' => DocumentType::class,
-                // these options are passed to each "email" type
-                                'by_reference' => false,
-                                'allow_add' => true,
-                                'allow_delete' => true
-                                             ])
-            ->add('save',SubmitType::class,[
-                                'label' => 'Valider les décisions',
-                                'attr' => [
-                                            'class' => 'btn btn-success'
-                                         ]
-                                            ])
             ->add('reset',ResetType::class,[
                 'label' => 'Annuler'
             ])

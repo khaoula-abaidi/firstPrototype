@@ -41,36 +41,39 @@
                 <!-- Formulaire des décisions -->
 
     <div class="container-fluid text-center">
-        {% if waitingDocuments | length > 0  %}
-        <blockquote>La liste des documents n'ayant pas encore une décision de dépôt</blockquote>
+        {% if contributor.documents | length > 0  %}
+            <blockquote>La liste des documents n'ayant pas encore une décision de dépôt</blockquote>
 
-          <table class="table">
-              <tbdody>
-              {% for waitDocument in waitingDocuments %}
-                  <th class="text-center">Document DOI</th>
-                  <th class="text-center">Titre du document</th>
-                  <th class="text-center">Etat du Dépôt</th>
-                  <th class="text-center">Date de la dernière décision </th>
-                  <th class="text-center">Voulez-vous déposer dans HAL ? </th>
-              <tr>
 
-                  <td>{{ waitDocument['document']['doi'] }}</td>
-                  <td>{{ waitDocument['document']['title'] }}</td>
-                  <td>{{ waitDocument['document']['decisionContent'] }}</td>
-                  <td>{{ waitDocument['document']['dateCreationDecision'] | date('Y-m-d H:i:S') }}</td>
-                  <td>
-                      <p class="text-center">
-                          <input type="radio" name="R1" value="Oui"> Oui
-                          &nbsp;&nbsp;&nbsp;&nbsp;
-                          <input type="radio" name="R1" value="Non"> Non
-                          &nbsp;&nbsp;&nbsp;&nbsp;
-                          <input type="radio" name="R1" value="Ultérieurement"> Ultérieurement
-                      </p>
-                  </td>
-              </tr>
-              {% endfor %}
-              </tbdody>
-          </table>
+            {{ form_start(form,{'action': path('contributor_show',{'id': contributor.id})}) }}
+
+            <table class="table">
+                <th class="text-center">Document DOI</th>
+                <th class="text-center">Titre du document</th>
+                <th>Etat du dépôt du document sur HAL</th>
+                <th class="text-center">Date de la création de la décision </th>
+                <th class="text-center">Voulez-vous déposer dans HAL ? </th>
+
+                <tbdody>
+                    {% for document in contributor.documents %}
+                        <tr>
+                            <td> {{ document.doi }}</td>
+                            <td>{{ document.title }}</td>
+                            <td>{{ document.decision.content }}</td>
+                            <td>{{ document.decision.allowedAt | date('Y-m-d à H:i:s') }}</td>
+                            <td>
+                                <select name="{{ document.decision.id }}_{{ document.id }}_{{ contributor.id }}">
+                                    <option>Choisir la décision</option>
+                                    <option value="true">Oui, Je veux dépôser sur HAL</option>
+                                    <option value="false">Non, Je ne veux pas dépôser sur HAL</option>
+                                    <option value="null">Ultérieurement</option>
+                                </select>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbdody>
+            </table>
+            {{ form_end(form) }}
         {% else %}
             <blockquote>Vous n'avez aucun document en attente de dépôt</blockquote>
         {% endif %}
@@ -80,32 +83,8 @@
      <!-- Fin Formulaire -->
 
 
-    <a href="{{ path('contributor_connexion') }}" class="btn btn-primary my-2">Se déconnecter</a>
+    <a href="{{ path('contributor_logout') }}" class="btn btn-primary my-2">Se déconnecter</a>
     <br /><br />
 
 
-    <div class="container-fluid text-center">
-        {% if waitingDocuments | length > 0  %}
-            <blockquote>Affichage essai des formulaires pour chaque decision</blockquote>
-
-            <table class="table">
-                <tbdody>
-                    {% for waitDocument in waitingDocuments %}
-                        <tr>
-                            <td>ttttfgdgdgd</td>
-                        </tr>
-                              <tr>
-                                  <td>
-                                            {{ form(form) }}
-                                           {{ form_widget(form) }}
-                                             {{ form_end(form) }}
-                                  </td>
-                              </tr>
-                    {% endfor %}
-                </tbdody>
-            </table>
-        {% else %}
-            <blockquote>Vous n'avez aucun document en attente de dépôt</blockquote>
-        {% endif %}
-    </div>
 {% endblock %}
