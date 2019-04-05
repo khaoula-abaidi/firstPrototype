@@ -49,30 +49,15 @@
 
             <table class="table">
                 <th class="text-center">Document DOI</th>
-                <th class="text-center">Titre du document</th>
-                <th>Etat du dépôt du document sur HAL</th>
                 <th class="text-center">Date de la création de la décision </th>
                 <th class="text-center">Voulez-vous déposer dans HAL ? </th>
 
                 <tbdody>
-                    {% for document in contributor.documents %}
+                    {% for formu in forms %}
                         <tr>
-                            <td> {{ document.doi }}</td>
-                            <td>{{ document.title }}</td>
-                            <td>{{ document.decision.content }}</td>
-                            <td>{{ document.decision.allowedAt | date('Y-m-d à H:i:s') }}</td>
-                            <td>
-
-                                <select name="{{ document.decision.id }}_{{ document.id }}_{{ contributor.id }}">
-                                    <option>Choisir la décision</option>
-                                    <option value="true">Oui, Je veux dépôser sur HAL</option>
-                                    <option value="false">Non, Je ne veux pas dépôser sur HAL</option>
-                                    <option value="null">Ultérieurement</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-
+                            <td> {{ formu.id.vars.value }}</td>
+                            <td>{{ contributor.decision.allowedAt | date('Y-m-d à H:i:s') }}</td>
+                            <td>{{ form_widget(formu) }}</td>
                         </tr>
                     {% endfor %}
                 </tbdody>
@@ -87,12 +72,4 @@
      <!-- Fin Formulaire -->
 
 
-    <a href="{{ path('contributor_logout') }}" class="btn btn-primary my-2">Se déconnecter</a>
-<br /><br /><br/>
-    <h1>Formulaire de Test</h1>
-    <ul>
-        {% for formu in forms %}
-            <li>{{ dump(formu) }}</li>
-        {% endfor %}
-    </ul>
 {% endblock %}
